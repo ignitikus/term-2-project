@@ -3,15 +3,24 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+require('dotenv').config()
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use((req,res,next) => {
+  res.io = io
+  next()
+})
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,4 +47,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app, server, io};

@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+#canvas{
+  height: calc(20*32px);
+  width: calc(35*32px);
+  content: "";
+  background-color: #505050;
+  margin: 0 auto;
+}
