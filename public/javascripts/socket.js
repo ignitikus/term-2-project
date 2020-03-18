@@ -18,12 +18,13 @@ socket.emit('user-connected', (onlineUsers) => {
       const instance = new User(id)
       instance.setPosition(user.coordinates)
       users.push({id, instance})
+      console.log('All users ',users)
    })
 })
 
 socket.on('user-connected', (id) => {
    if(id === socket.id) return 
-   const user = new User()
+   const user = new User(id)
    users.push({id, instance: user})
 })
 
@@ -33,8 +34,10 @@ socket.on('user-disconnected', (id) => {
 })
 
 socket.on('user-move', (user) => {
-   console.log(users)
    const index = getIndex(user.id)
+   console.log(users)
+   console.log(index)
+
    const instance = users[index].instance
    instance.setPosition(user.coordinates)
 })

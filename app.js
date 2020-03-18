@@ -36,8 +36,8 @@ const getIndex = (id) => {
 
 
 io.on('connection', (socket) => {
-  socket.on('user-connected', cb => {
-    cb(users)
+  socket.on('user-connected', callback => {
+    callback(users)
     users.push({id: socket.id})
     io.emit('user-connected', socket.id)
   })
