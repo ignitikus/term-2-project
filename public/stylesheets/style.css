@@ -6,28 +6,3 @@ body {
 a {
   color: #00B7FF;
 }
-
-#canvas{
-  height: calc(20*32px);
-  width: calc(35*32px);
-  content: "";
-  background-color: #505050;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.user{
-  position: absolute;
-  top: calc(10*32px);
-  left: calc(17*32px);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #fff;
-  content: "";
-}
-
-.player{
-  background: cyan;
-}

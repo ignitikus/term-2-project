@@ -3,58 +3,67 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-require('dotenv').config()
+const session = require('express-session')
+const mongoose = require('mongoose')
+const passport = require('passport')
+const flash = require('connect-flash')
+const methodOverride = require('method-override')
 
+let MongoStore = require('connect-mongo')(session)
+require('./lib/passport')
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users/usersRoutes');
+const adminRouter = require('./routes/admin/adminRoutes');
 
 const app = express();
-const server = require('http').createServer(app)
-const io = require('socket.io')(server)
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(`MongoDB Error: ${err}`));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-app.use((req,res,next) => {
-  res.io = io
-  next()
-})
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'))
+app.use(flash())
 
-const users = []
-
-const getIndex = (id) => {
-  return users.findIndex((user) => user.id ===id)
-}
-
-
-io.on('connection', (socket) => {
-  socket.on('user-connected', callback => {
-    callback(users)
-    users.push({id: socket.id})
-    io.emit('user-connected', socket.id)
+app.use(session({
+  resave:true,
+  saveUninitialized:true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+      url: process.env.MONGODB_URI,
+      autoReconnect: true,
+      cookie: { maxAge: 6000}
   })
-  socket.on('disconnect', () => {
-    const index = getIndex(socket.id)
-    users.splice(1, index)
-    io.emit('user-disconnected', socket.id)
-  })
-  socket.on('user-move', (coordinates) => {
-    const index = getIndex(socket.id)
-    users[index].coordinates = coordinates
-    io.emit('user-move', {id:socket.id, coordinates})
-  })
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use((req,res,next) => {
+  res.locals.user = req.user
+  res.locals.errors = req.flash('errors')
+  res.locals.message = req.flash('message')
+  res.locals.success = req.flash('success')
+  next()
 })
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/admin', adminRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,4 +81,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = {app, server, io};
+module.exports = app;

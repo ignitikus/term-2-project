@@ -5,8 +5,12 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <div id="canvas"></div>
-    <script src="socket.io/socket.io.js"></script>
-    <script src="/javascripts/socket.js" type="module"></script>
+    <h1><%= title %></h1>
+    <% console.log(user) %> 
+    <% if (user) { %>
+      <p>Welcome <%= user.profile.first %></p> 
+      <% } else { %>
+      <p>Welcome to <%= title %></p>
+      <% } %>
   </body>
 </html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="/stylesheets/login.css">
+   <title>Document</title>
+</head>
+<body>
+   <div class="box">
+
+      <h2>Login</h2>
+      
+      <form action="/api/users/login" method='POST'>
+      
+      <!-- Login -->
+      
+      <div class="login-form">
+         
+         <label for="email">E-mail</label>
+         <input type="text" id="email" placeholder="E-mail" name='email'>
+         
+         <label for="password">Password</label>
+         <input type="password" id="password" placeholder="Password" name="password">
+         
+      </div>
+      
+      <!-- Register -->
+      
+      <div class="register-form">
+
+         <label for="repeat-password">Repeat Password</label>
+         <input disabled type="password" id="repeat-password" placeholder="Repeat Password">
+         
+         <label for="first">First Name</label>
+         <input disabled type="text" id="first" placeholder="First Name" name="first">
+         
+         <label for="last">Last Name</label>
+         <input disabled type="text" id="last" placeholder="Last Name" name="last">
+         
+         <br>
+         <br>
+         
+      </div>
+      
+      <!-- Submit -->
+      
+      <input type="submit" id="submit" value="Login">
+      
+      <!-- Help -->
+      
+      <a href="register.htm" class="register">Register!</a>
+      <a href="#" class="forgot-password" title="Forgot password?">Forgot?</a>
+      
+      </form>
+   </div>
+   <script src="/javascripts/login.js"></script>
+</body>
+</html>
