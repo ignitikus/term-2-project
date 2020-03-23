@@ -18,6 +18,8 @@ const usersRouter = require('./routes/users/usersRoutes');
 const adminRouter = require('./routes/admin/adminRoutes');
 
 const app = express();
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -81,4 +83,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app, server, io};
