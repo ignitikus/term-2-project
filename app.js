@@ -63,6 +63,17 @@ app.use((req,res,next) => {
   next()
 })
 
+io.on('connection', (socket) => {
+  console.log('A user connected')
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  })
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  })
+})
+
+
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/admin', adminRouter)
