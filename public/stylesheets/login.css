@@ -1,4 +1,5 @@
 * { box-sizing: border-box }
+
 html, body {
    display: table;
    margin: 0;
@@ -92,6 +93,7 @@ input:focus {
    text-decoration: none;
    color: #666;
 }
+
 #submit ~ a:hover {
    text-decoration: underline;
 }
