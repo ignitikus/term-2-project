@@ -1,5 +1,5 @@
-margin: 0; 
-   * { 
+* { 
+   margin: 0; 
    padding: 0; 
    box-sizing: border-box; 
 }
@@ -7,6 +7,8 @@ margin: 0;
 body { 
    padding: 1%; 
    font: 13px Helvetica, Arial; 
+   background: rgb(22,21,32);
+   background: linear-gradient(90deg, rgba(22,21,32,1) 0%, rgba(179,179,182,1) 75%, rgba(0,0,0,1) 100%)
 }
 
 form { 
@@ -44,6 +46,17 @@ form button {
 #messages li:nth-child(odd) { 
    background: #eee; 
 }
+
+.container{
+   padding-top: 10px;
+}
+
+.article-image{
+   border-radius: 20px;
+   width: 286px;
+   height: 180px;
+}
+
 
 @media (min-width: 576px){
    form {
