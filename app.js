@@ -64,12 +64,14 @@ app.use((req,res,next) => {
 })
 
 io.on('connection', (socket) => {
-  console.log('A user connected')
-  socket.on('disconnect', function(){
+  const users = []
+  console.log(`${socket.id} connected`)
+  socket.emit('userConnected', 'You are now connected!')
+  socket.on('disconnect', ()=>{
     console.log('user disconnected');
   })
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
+  socket.on('chat message',({msg, username})=>{
+    io.emit('chat message', {msg, id: username});
   })
 })
 

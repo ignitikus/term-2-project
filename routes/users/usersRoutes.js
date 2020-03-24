@@ -20,13 +20,14 @@ router.post('/register', [
       check('last', 'Name is required').not().isEmpty(),
       check('first', 'Name is required').not().isEmpty(),
       check('email', 'Email is required').isEmail(),
+      check('nickname', 'Username is required').not().isEmpty(),
       check('password', 'Password is required').isLength({min: 3})
   ],(req,res,next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()) return res.status(422).json({errors: errors.array()})
     User.findOne({email:req.body.email }).then(user=>{
         if(user) {
-          return res.render('auth/register')
+          return res.render('auth/login')
           // req.flash('errors', 'User already exists')
         }
 
@@ -34,6 +35,7 @@ router.post('/register', [
         newUser.profile.first = req.body.first
         newUser.profile.last = req.body.last
         newUser.profile.avatar = '/images/default_avatar.png'
+        newUser.nickname = req.body.nickname
         newUser.email = req.body.email
         newUser.password = req.body.password
 
