@@ -33,6 +33,51 @@ form button {
    padding: 10px; 
 }
 
+footer{
+   background-color: whitesmoke;
+   bottom: 0;
+   width: 100%;
+   height: 60px;
+   padding-bottom: 30px;
+}
+
+.welcome{
+   display: grid;
+   grid-template-columns: 15fr 1fr 1fr;
+   grid-template-areas: 
+      "welcome profile logout"
+}
+
+.welcome>p{
+   font-size: xx-large;
+}
+
+.welcome>a>button{
+   border: none;
+}
+
+.welcome>a>button{
+   color: black;
+}
+.welcome>a>button:hover{
+   color: white;
+}
+
+#logout{
+   grid-area: logout;
+   justify-self: end;
+}
+
+.jumbotron:hover{
+   outline: gray 1px solid;
+}
+
+#profile{
+   grid-area: profile;
+   justify-self: end;
+}
+
+
 #messages { 
    list-style-type: none; 
    margin: 0; 
@@ -55,6 +100,13 @@ form button {
    border-radius: 20px;
    width: 286px;
    height: 180px;
+}
+
+#gradient{
+   width: 100%;
+   height: 800px;
+   padding: 1%;
+   margin: 0px;
 }
 
 
