@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./models/User')
+const Post = require('../admin/models/Post')
 const {check,validationResult} = require('express-validator')
 const passport = require('passport')
 
@@ -50,5 +51,17 @@ router.post('/register', [
     }).catch(err=> next(err))
   }
 )
+
+router.post('/createpost', (req,res,next) => {
+  let newPost = new Post()
+  newPost.author = req.user._id
+  newPost.title = req.body.title
+  newPost.picture = req.body.pictureURL
+  newPost.content = req.body.content
+  newPost.tags = req.body.tags.split(',').map(tag=>tag.trim())
+  newPost.save().then((post) => {
+    return res.redirect('/')
+  }).catch(err=>console.log(err))
+})
 
 module.exports = router;

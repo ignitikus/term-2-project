@@ -5,7 +5,7 @@ $(function () {
    socket.on('userConnected', (msg) => {
       $('#messages').append($('<li>').text(`Server Message: ${msg}`));
    })
-   $('form').submit(function(e){
+   $('#chat-form').submit(function(e){
       e.preventDefault(); // prevents page reloading
       let msg = $('#m').val()
       let username = document.getElementById('username').innerHTML
