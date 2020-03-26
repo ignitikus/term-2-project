@@ -34,7 +34,7 @@ body {
 }
 
 footer{
-   background-color: whitesmoke;
+   background-color: rgb(238, 237, 237);
    bottom: 0;
    width: 100%;
    height: 60px;
@@ -68,8 +68,17 @@ footer{
    justify-self: end;
 }
 
+.jumbotron{
+   background-color: dimgray;
+   color: floralwhite;
+}
+
 .jumbotron:hover{
-   outline: gray 1px solid;
+   outline: rgb(45, 24, 238) 1px solid;
+}
+
+.jumbotron>a{
+   color: floralwhite;
 }
 
 #profile{
@@ -109,8 +118,20 @@ footer{
    margin: 0px;
 }
 
+.post-picture-preview{
+   max-width: 286px;
+}
 
+.single-post-container{
+   width: 70vw;
+}
+.post-form{
+   width: 100%;
+}
 
+#createpost-form{
+   padding-top: 10px;
+}
 
 @media (min-width: 576px){
    form {
