@@ -11,7 +11,7 @@ router.get('/', async(req, res, next)=> {
     const allPosts = await Post.find({})
     return res.render('index', {title: 'Main page', data: response.data, allPosts})
   }
-  return res.render('auth/login', { title: 'Express' });
+  return res.render('auth/login');
 });
 
 router.get('/logout', (req,res,next) => {

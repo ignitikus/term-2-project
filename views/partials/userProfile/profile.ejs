@@ -1,0 +1,42 @@
+<div class="tab-pane fade show active" id="user-profile" role="tabpanel" aria-labelledby="user-profile-tab">
+   <div class='profile-container' style="display: flex;">
+      <form class="form-horizontal update-form" role="form" method="POST" action="/api/users/update-profile?_method=PUT">
+         <div class="form-group profile-div-align">
+            <div class="col-lg-8">
+               <img src="<%= user.profile.avatar %>" alt="avatar" style="max-width: 196px; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px;">
+               <input class="form-control" type="text" placeholder="Copy URL here" name='avatar'>
+            </div>
+         </div>
+         <div class="form-group profile-div-align">
+            <label class="col-lg-3 control-label profile-label-align">First name:</label>
+            <div class="col-lg-8">
+               <input class="form-control" type="text" value="<%= user.profile.first %>" name='first'>
+            </div>
+         </div>
+         <div class="form-group profile-div-align">
+            <label class="col-lg-3 control-label profile-label-align">Last name:</label>
+            <div class="col-lg-8">
+               <input class="form-control" type="text" value="<%= user.profile.last %>" name='last'>
+            </div>
+         </div>
+         <div class="form-group profile-div-align">
+            <label class="col-lg-3 control-label profile-label-align">Email:</label>
+            <div class="col-lg-8">
+               <input class="form-control" type="text" value="<%= user.email %>" name='email'>
+            </div>
+         </div>
+         <div class="form-group profile-div-align">
+            <label class="col-md-3 control-label profile-label-align">Nickname:</label>
+            <div class="col-md-8">
+               <input class="form-control" type="text" value="<%= user.nickname %>" name='nickname'>
+            </div>
+         </div>
+         <div class="form-group profile-div-align">
+            <div class="col-md-8" style="display: flex; justify-content: center;">
+               <input type="submit" class="btn btn-primary" value="Save Changes">
+               <span></span>
+            </div>
+         </div>
+      </form>
+   </div>
+</div>

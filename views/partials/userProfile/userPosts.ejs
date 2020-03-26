@@ -23,23 +23,5 @@
             <% } %>
          <%})%> 
       </div>
-      <div class='post-form'>
-         <form  action="/api/users/createpost" method="POST" id='createpost-form'>
-            <div class="form-group">
-               <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Title" name='title'>
-            </div>
-            <div class="form-group">
-               <input type="text" class="form-control" id="pictureURL" aria-describedby="url" placeholder="URL to your picture" name='pictureURL'>
-            </div>
-            <div class="input-group">
-               <textarea class="form-control" aria-label="With textarea" placeholder="Type here" name='content'></textarea>
-            </div>
-            <br>
-            <div class="form-group">
-               <input type="text" class="form-control" id="tags" aria-describedby="url" placeholder="Type in you tags here" name='tags'>
-            </div>
-            <button type="submit" class="btn btn-primary" form="createpost-form">Create post</button>
-         </form>
-      </div>
    </div>
 </div>

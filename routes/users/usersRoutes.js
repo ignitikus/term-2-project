@@ -10,6 +10,14 @@ router.get('/login', (req, res, next)=> {
   res.render('auth/login')
 });
 
+router.get('/profile', async(req,res,next) => {
+  if(req.user.admin){
+    return res.send('admin')
+  }
+  const allPosts = await Post.find({author: req.user._id})
+  return res.render('auth/userProfile', {allPosts})
+})
+
 router.post('/login', passport.authenticate('local-login', {
     successRedirect: '/',
     failureRedirect: '/api/users/login',
@@ -45,16 +53,30 @@ router.post('/register', [
           if(user) return req.login(user, (err) => {
               if(err) return res.status(400).json({confirmation: false, message: err})
               // next()
-              res.render('index', {title: 'Success', user})
+              res.redirect('/')
           })
         }).catch(err=> next(err))
     }).catch(err=> next(err))
   }
 )
 
+router.put('/update-profile', async(req,res,next) => {
+  const theUser = await User.findOne({email: req.user.email})
+  if(req.body.avatar) theUser.profile.avatar = req.body.avatar
+  if(req.body.first) theUser.profile.first = req.body.first
+  if(req.body.last) theUser.profile.last = req.body.last
+  if(req.body.email) theUser.email = req.body.email
+  if(req.body.nickname) theUser.nickname = req.body.nickname
+
+  theUser.save(user=>{
+    return res.redirect('/api/users/profile')
+  }).then(err=>console.log(err))
+})
+
 router.post('/createpost', (req,res,next) => {
   let newPost = new Post()
   newPost.author = req.user._id
+  newPost.authorNickname = req.user.nickname
   newPost.title = req.body.title
   newPost.picture = req.body.pictureURL
   newPost.content = req.body.content
