@@ -70,8 +70,8 @@ io.on('connection', (socket) => {
   socket.on('disconnect', ()=>{
     console.log('user disconnected');
   })
-  socket.on('chat message',({msg, username})=>{
-    io.emit('chat message', {msg, id: username});
+  socket.on('chat message',({msg, username, avatar})=>{
+    io.emit('chat message', {msg, id: username, avatar});
   })
 })
 

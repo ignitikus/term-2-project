@@ -9,12 +9,13 @@ $(function () {
       e.preventDefault(); // prevents page reloading
       let msg = $('#m').val()
       let username = document.getElementById('username').innerHTML
-      socket.emit('chat message', {msg, username});
+      let avatar = document.getElementById('avatar').innerHTML
+      socket.emit('chat message', {msg, username, avatar});
       $('#m').val('');
       return false;
    });
-   socket.on('chat message', ({msg, id})=>{
+   socket.on('chat message', ({msg, id, avatar})=>{
       console.log(socket)
-      $('#messages').append($('<li>').text(`${id}: ${msg}`));
+      $('#messages').append($('<div class="avatar">').append($(`<img src='${avatar}'><li>${id}: ${msg}</li>`)));
    });
 });

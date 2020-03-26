@@ -10,6 +10,7 @@
       <% if (user) { %>
         <div class="welcome">
           <p>Welcome <span id='username'><%= user.nickname %></span></p>
+          <span style='visibility: hidden;' id='avatar'><%= user.profile.avatar %></span>
           <a href="/api/users/profile/" id='profile'><button type="button" class="btn btn-outline-secondary">Profile</button></a>
           <a href="/logout" id='logout'><button type="button" class="btn btn-outline-secondary">Logout</button></a>
         </div>
