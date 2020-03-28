@@ -1,0 +1,22 @@
+.welcome{
+   display: grid;
+   grid-template-columns: 15fr 1fr 1fr;
+   grid-template-areas: 
+      "welcome profile home logout"
+}
+
+#logout{
+   grid-area: logout;
+   justify-self: end;
+}
+#home{
+   grid-area: home;
+   justify-self: end;
+}
+
+#error{
+   text-align: center;
+   font-size: large;
+   background-color: rgb(250, 76, 76);
+   border-radius: 15px;
+}

@@ -4,6 +4,7 @@ const User = require('./models/User')
 const Post = require('../admin/models/Post')
 const {check,validationResult} = require('express-validator')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 /* GET users listing. */
 router.get('/login', (req, res, next)=> {
@@ -15,7 +16,7 @@ router.get('/profile', async(req,res,next) => {
     return res.send('admin')
   }
   const allPosts = await Post.find({author: req.user._id})
-  return res.render('auth/userProfile', {allPosts})
+  return res.render('auth/userProfile', {allPosts, error: ''})
 })
 
 router.post('/login', passport.authenticate('local-login', {
@@ -71,6 +72,22 @@ router.put('/update-profile', async(req,res,next) => {
   theUser.save(user=>{
     return res.redirect('/api/users/profile')
   }).then(err=>console.log(err))
+})
+
+router.put('/update-password', async(req,res,next) => {
+  const theUser = await User.findOne({email: req.user.email})
+  const {oldPassword, newPassword, newPasswordRepeat} = req.body
+  if(oldPassword || newPassword || newPasswordRepeat){
+    if(newPassword !== newPasswordRepeat) return res.send('The repeat doesn\'t match')
+    const result = await bcrypt.compare(oldPassword, theUser.password)
+    console.log(result)
+    if(!result) return res.send('Old password doesn\'t match')
+    theUser.password = newPassword
+    theUser.save((user) => {
+      return res.redirect('/api/users/profile')
+    }).then(err=>console.log(err))
+  }
+  return res.send('You need to fill old fields to change password')
 })
 
 router.post('/createpost', (req,res,next) => {

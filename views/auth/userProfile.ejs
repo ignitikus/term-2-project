@@ -3,6 +3,7 @@
    <head>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
       <link rel='stylesheet' href='/stylesheets/main.css' />
+      <link rel='stylesheet' href='/stylesheets/profile.css' />
       <title>Profile</title>
    </head>
    <body id="gradient">
@@ -11,15 +12,15 @@
          <div class="welcome">
             <p>Welcome <span id='username'><%= user.nickname %></span></p>
             <a href="/" id='home'><button type="button" class="btn btn-outline-secondary">Home</button></a>
-            <a href="/api/users/profile/" id='profile'><button type="button" class="btn btn-outline-secondary">Profile</button></a>
             <a href="/logout" id='logout'><button type="button" class="btn btn-outline-secondary">Logout</button></a>
          </div>
-         <% } else { %>
-            <p>Welcome to <%= title %></p>
-            <% } %>
+         <% } %>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                <li class="nav-item">
                <a class="nav-link active" id="user-profile-tab" data-toggle="tab" href="#user-profile" role="tab" aria-controls="user-profile" aria-selected="true">Profile</a>
+               </li>
+               <li class="nav-item">
+               <a class="nav-link" id="user-password-tab" data-toggle="tab" href="#user-password" role="tab" aria-controls="user-password" aria-selected="true">Password</a>
                </li>
                <li class="nav-item">
                <a class="nav-link" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="false">My posts</a>
@@ -27,6 +28,7 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                <% include ../partials/userProfile/profile.ejs %> 
+               <% include ../partials/userProfile/password.ejs %> 
                <% include ../partials/userProfile/userPosts.ejs %> 
             </div>
             <% include ../partials/footer.ejs %> 
