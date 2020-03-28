@@ -10,16 +10,18 @@
                               <img src="<%=picture%>" alt="<%=title%>" class='post-picture-preview'> 
                            <% } %> 
                         </div>
-                        <div>
-                           <form method="POST" action="/api/admin/update-visibility/<%=_id%>?_method=PUT">
-                           <% if(visibility){ %>
-                                 <label> Change Status:</label>
-                                 <button type="submit" class="btn btn-success btn-sm">Visible</button>
-                              <% } else { %>
-                                 <label> Change Status:</label>
-                                 <button type="submit" class="btn btn-warning btn-sm">Hidden</button>
-                                 <% } %>
-                           </form>
+                        <div> 
+                           <div style="display: flex;"> 
+                              <form method="POST" action="/api/admin/update-visibility/<%=_id%>?_method=PUT">
+                                 <% if(visibility){ %>
+                                    <label> Change Status:</label>
+                                    <button type="submit" class="btn btn-success btn-sm">Visible</button>
+                                 <% } else { %>
+                                    <label> Change Status:</label>
+                                    <button type="submit" class="btn btn-warning btn-sm">Hidden</button>
+                                    <% } %>
+                              </form>
+                           </div>
                            <h1><%= title %></h1>
                            <p><%= content %></p>
                            <p><%= tags %></p>
