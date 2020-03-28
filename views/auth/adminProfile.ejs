@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel='stylesheet' href='/stylesheets/main.css' />
+      <link rel='stylesheet' href='/stylesheets/profile.css' />
+      <title>Profile</title>
+   </head>
+   <body id="gradient">
+      <div class='container' style='background-color: rgb(238, 237, 237); border-radius: 15px;'>
+         <% if (user) { %>
+         <div class="welcome">
+            <p>Welcome <span id='username'><%= user.nickname %></span></p>
+            <a href="/" id='home'><button type="button" class="btn btn-outline-secondary">Home</button></a>
+            <a href="/logout" id='logout'><button type="button" class="btn btn-outline-secondary">Logout</button></a>
+         </div>
+         <% } %>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+               <li class="nav-item">
+               <a class="nav-link active" id="user-profile-tab" data-toggle="tab" href="#user-profile" role="tab" aria-controls="user-profile" aria-selected="true">Profile</a>
+               </li>
+               <li class="nav-item">
+               <a class="nav-link" id="user-password-tab" data-toggle="tab" href="#user-password" role="tab" aria-controls="user-password" aria-selected="false">Password</a>
+               </li>
+               <li class="nav-item">
+               <a class="nav-link" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="false">My posts</a>
+               </li>
+               <li class="nav-item">
+               <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Users</a>
+               </li>
+               <li class="nav-item">
+               <a class="nav-link" id="all-posts-tab" data-toggle="tab" href="#all-posts" role="tab" aria-controls="all-posts" aria-selected="false">All posts</a>
+               </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+               <% include ../partials/userProfile/profile.ejs %> 
+               <% include ../partials/userProfile/password.ejs %> 
+               <% include ../partials/userProfile/userPosts.ejs %> 
+               <% include ../partials/adminProfile/users.ejs %> 
+               <% include ../partials/adminProfile/allUserPosts.ejs %> 
+            </div>
+            <% include ../partials/footer.ejs %> 
+         </div>
+      <% include ../partials/scripts.ejs %>
+   </body>
+</html>

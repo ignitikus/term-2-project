@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const User = require('../users/models/User')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-   res.send('respond with a resource');
-});
+const {deleteUser, updatePostVisibility} = require('./controllers/adminController')
+
+router.put('/update-visibility/:id', updatePostVisibility)
+router.delete('/delete-user/:email', deleteUser)
 
 module.exports = router;

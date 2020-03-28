@@ -1,0 +1,34 @@
+<div class="tab-pane fade" id="all-posts" role="tabpanel" aria-labelledby="all-posts-tab">
+   <div class='post-container' style="display: flex;">
+      <div class='posts'>
+         <% allPosts.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, time, _id})=>{%>
+               <div class="container single-post-container">
+                  <div class="jumbotron post-jumbotron">
+                     <div style="display: flex;">
+                        <div style="padding-right: 30px;">
+                           <% if (picture !== '') { %>
+                              <img src="<%=picture%>" alt="<%=title%>" class='post-picture-preview'> 
+                           <% } %> 
+                        </div>
+                        <div>
+                           <form method="POST" action="/api/admin/update-visibility/<%=_id%>?_method=PUT">
+                           <% if(visibility){ %>
+                                 <label> Change Status:</label>
+                                 <button type="submit" class="btn btn-success btn-sm">Visible</button>
+                              <% } else { %>
+                                 <label> Change Status:</label>
+                                 <button type="submit" class="btn btn-warning btn-sm">Hidden</button>
+                                 <% } %>
+                           </form>
+                           <h1><%= title %></h1>
+                           <p><%= content %></p>
+                           <p><%= tags %></p>
+                           <p>Posted by <%= authorNickname %> at <%= time %></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <%})%> 
+            </div>
+   </div>
+</div>

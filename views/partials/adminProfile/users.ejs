@@ -1,0 +1,44 @@
+<div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+   <div class='profile-container' style="display: flex; justify-content: center;">
+      <ul>
+         <% if (errors2) { %>
+            <p id='error'><%= errors2 %> </p>
+         <% } %>
+         <% if (success) { %>
+            <p id='success'><%= success %> </p>
+         <% } %>
+            <% allUsers.forEach(user=>{ %>
+               <form action="/api/admin/delete-user/<%=user.email%>?_method=Delete" method="POST">
+               <li style="padding: 10px; list-style-type: none">
+                  <div style="display: flex;">
+                     <div>
+                        <img src="<%= user.profile.avatar %> " alt="avatar" style="max-width: 50px; padding-right: 10px; border-radius: 15px;">
+                     </div>
+                     <div style="display: flex; justify-content: center; align-items: center;">
+                        <div class="users-table">
+                           <%= user.nickname %>
+                        </div>
+                        <div class="users-table">
+                           <%= user.profile.first %> <%= user.profile.last %>
+                        </div>
+                        <div class="users-table">
+                           <%= user.email %> 
+                        </div>
+                        <div class="users-table">
+                           <% if (user.admin) { %>
+                              Role: Admin
+                           <% } else { %>
+                              Role: User
+                           <% } %>
+                        </div>
+                        <div>
+                           <button type="submit" class="btn btn-danger">Delete User</button>
+                        </div>
+                     </div>
+                  </div>
+               </li>
+            </form>
+            <%})%> 
+         </ul>
+   </div>
+</div>
