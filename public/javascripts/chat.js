@@ -1,5 +1,3 @@
-
-
 $(function () {
    const socket = io();
    socket.on('userConnected', (msg) => {

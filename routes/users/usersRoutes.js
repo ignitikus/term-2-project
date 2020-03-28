@@ -78,16 +78,23 @@ router.put('/update-password', async(req,res,next) => {
   const theUser = await User.findOne({email: req.user.email})
   const {oldPassword, newPassword, newPasswordRepeat} = req.body
   if(oldPassword || newPassword || newPasswordRepeat){
-    if(newPassword !== newPasswordRepeat) return res.send('The repeat doesn\'t match')
+    if(newPassword !== newPasswordRepeat){
+      req.flash('errors', 'The repeat password doesn\'t match')
+      return res.redirect('back')
+    } 
     const result = await bcrypt.compare(oldPassword, theUser.password)
-    console.log(result)
-    if(!result) return res.send('Old password doesn\'t match')
+    if(!result){
+      req.flash('errors', 'Old password doesn\'t match')
+      return res.redirect('back')
+    } 
     theUser.password = newPassword
-    theUser.save((user) => {
-      return res.redirect('/api/users/profile')
+    await theUser.save((user) => {
+      req.flash('success', 'Password updated')
+      return res.redirect('back')
     }).then(err=>console.log(err))
   }
-  return res.send('You need to fill old fields to change password')
+  req.flash('errors', 'Fill old fields to change password')
+  return res.redirect('back')
 })
 
 router.post('/createpost', (req,res,next) => {

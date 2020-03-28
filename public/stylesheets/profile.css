@@ -20,3 +20,10 @@
    background-color: rgb(250, 76, 76);
    border-radius: 15px;
 }
+
+#success{
+   text-align: center;
+   font-size: large;
+   background-color: rgb(140, 250, 76);
+   border-radius: 15px;
+}
