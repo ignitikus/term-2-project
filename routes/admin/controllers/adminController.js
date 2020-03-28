@@ -24,11 +24,12 @@ module.exports ={
          await thePost.save().then((post) => {
             return res.redirect('back')  
          }).catch(err=>console.log(err))
+      }else {
+         thePost.visibility = true
+         await thePost.save().then((post) => {
+            return res.redirect('back')  
+         }).catch(err=>console.log(err))
       }
-      thePost.visibility = true
-      await thePost.save().then((post) => {
-         return res.redirect('back')  
-      }).catch(err=>console.log(err))
    }
 
 }

@@ -2,16 +2,20 @@
    <div class='post-container' style="display: flex;">
       <div class='posts'>
          <% allPostsByUser.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, time})=>{%>
-            <% if(visibility===true){ %>
-               <div class="container single-post-container">
-                  <div class="jumbotron post-jumbotron">
-                     <div style="display: flex;">
-                        <div style="padding-right: 30px;">
-                           <% if (picture !== '') { %>
-                              <img src="<%=picture%>" alt="<%=title%>" class='post-picture-preview'> 
+            <div class="container single-post-container">
+               <div class="jumbotron post-jumbotron">
+                  <div style="display: flex;">
+                     <div style="padding-right: 30px;">
+                        <% if (picture !== '') { %>
+                           <img src="<%=picture%>" alt="<%=title%>" class='post-picture-preview'> 
                            <% } %> 
                         </div>
                         <div>
+                           <% if(visibility===true){ %>
+                              <label>Status: <span style="color: rgb(33, 236, 33);">Visible</span></label>
+                              <% } else { %>
+                              <label>Status: <span style="color: rgb(230, 215, 82);">Restricted by admin</span></label>
+                           <% } %>
                            <h1><%= title %></h1>
                            <p><%= content %> </p>
                            <p><%= tags %> </p>
@@ -20,8 +24,7 @@
                      </div>
                   </div>
                </div>
-            <% } %>
-         <%})%> 
+            <%})%> 
       </div>
    </div>
 </div>
