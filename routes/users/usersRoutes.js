@@ -13,14 +13,15 @@ const{
 
 const {
   loginInputValidation,
+  loginValidationFail
 } = require('../admin/utils/inputValidation')
 
 router.get('/login', getLogin);
-router.get('/profile', getProfile)
+router.get('/profile',loginValidationFail, getProfile)
 router.post('/login', login)
 router.post('/register', loginInputValidation, register)
-router.put('/update-profile', updateProfile)
-router.put('/update-password', updatePassword)
-router.post('/createpost', createPost)
+router.put('/update-profile', loginValidationFail, updateProfile)
+router.put('/update-password', loginValidationFail, updatePassword)
+router.post('/createpost',loginValidationFail, createPost)
 
 module.exports = router;

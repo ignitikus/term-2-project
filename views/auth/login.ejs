@@ -14,7 +14,9 @@
          <div id="large-header" class="large-header">
             <canvas id="demo-canvas"></canvas>
             <div class="box">
-
+               <% if (errors) { %>
+                     <p id='login-error'><span><%= errors %></span></p>
+               <% } %>
                <h2>Login</h2>
                
                <form action="/api/users/login" method='POST'>
@@ -34,9 +36,6 @@
                <!-- Register -->
                
                <div class="register-form">
-
-                  <label for="repeat-password">Repeat Password</label>
-                  <input disabled type="password" id="repeat-password" placeholder="Repeat Password">
                   <br>
                   <label for="nickname">Nickname</label>
                   <input disabled type="text" id="nickname" placeholder="Nickname" name="nickname">

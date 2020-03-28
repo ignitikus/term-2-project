@@ -93,3 +93,10 @@ input:focus {
 #submit ~ a:hover {
    text-decoration: underline;
 }
+
+#login-error{
+   text-align: center;
+   color: white;
+   background-color: rgb(250, 76, 76);
+   border-radius: 15px;
+}

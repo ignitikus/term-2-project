@@ -59,14 +59,15 @@ app.use((req,res,next) => {
   res.locals.user = req.user
   res.locals.errors = req.flash('errors')
   res.locals.errors2 = req.flash('errors2')
+  res.locals.errors3 = req.flash('errors3')
   res.locals.message = req.flash('message')
   res.locals.success = req.flash('success')
+  res.locals.success2 = req.flash('success2')
   next()
 })
 
 io.on('connection', (socket) => {
   const users = []
-  console.log(`${socket.id} connected`)
   socket.emit('userConnected', 'You are now connected!')
   socket.on('disconnect', ()=>{
     console.log('user disconnected');

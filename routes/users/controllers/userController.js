@@ -28,11 +28,14 @@ module.exports = {
 
    register: (req,res,next) => {
       const errors = validationResult(req)
-      if(!errors.isEmpty()) return res.status(422).json({errors: errors.array()})
+      if(!errors.isEmpty()){
+         req.flash('errors', 'All fields must be filled')
+         return res.redirect('/')
+      }
       User.findOne({email:req.body.email }).then(user=>{
          if(user) {
-            return res.render('auth/login')
-            // req.flash('errors', 'User already exists')
+            req.flash('errors', 'User already exists')
+            return res.redirect('/')
          }
 
          const newUser = new User
@@ -45,7 +48,10 @@ module.exports = {
 
          newUser.save().then(user=>{
             if(user) return req.login(user, (err) => {
-               if(err) return res.status(400).json({confirmation: false, message: err})
+               if(err){
+                  req.flash('errors', 'Couldn\'t login. Contact website admin')
+                  return res.redirect('/')
+               }
                return res.redirect('/')
             })
          }).catch(err=> next(err))
@@ -61,6 +67,7 @@ module.exports = {
       if(req.body.nickname) theUser.nickname = req.body.nickname
 
       theUser.save(user=>{
+         req.flash('success2', 'Profile updated')
          return res.redirect('/api/users/profile')
       }).then(err=>console.log(err))
    },

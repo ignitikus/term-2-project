@@ -1,6 +1,12 @@
 <div class="tab-pane fade show active" id="user-profile" role="tabpanel" aria-labelledby="user-profile-tab">
    <div class='profile-container' style="display: flex;">
       <form class="form-horizontal update-form" role="form" method="POST" action="/api/users/update-profile?_method=PUT">
+         <% if (errors3) { %>
+            <p id='error'><%= errors3 %> </p>
+         <% } %>
+         <% if (success2) { %>
+            <p id='success'><%= success2 %> </p>
+         <% } %>
          <div class="form-group profile-div-align">
             <div class="col-lg-8">
                <img src="<%= user.profile.avatar %>" alt="avatar" style="max-width: 196px; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px;">

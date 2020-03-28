@@ -2,9 +2,16 @@ const express = require('express');
 const router = express.Router();
 const User = require('../users/models/User')
 
-const {deleteUser, updatePostVisibility} = require('./controllers/adminController')
+const {
+   deleteUser, 
+   updatePostVisibility
+} = require('./controllers/adminController')
 
-router.put('/update-visibility/:id', updatePostVisibility)
-router.delete('/delete-user/:email', deleteUser)
+const {
+   loginValidationFail
+} = require('./utils/inputValidation')
+
+router.put('/update-visibility/:id', loginValidationFail, updatePostVisibility)
+router.delete('/delete-user/:email', loginValidationFail ,deleteUser)
 
 module.exports = router;
