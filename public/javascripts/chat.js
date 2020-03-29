@@ -7,7 +7,7 @@ $(function () {
       e.preventDefault(); // prevents page reloading
       let msg = $('#m').val()
       let username = document.getElementById('username').innerHTML
-      let avatar = document.getElementById('avatar').innerHTML
+      let avatar = document.getElementById('avatar').src
       socket.emit('chat message', {msg, username, avatar});
       $('#m').val('');
       return false;

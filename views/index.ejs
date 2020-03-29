@@ -9,11 +9,10 @@
     <div class='container' style='background-color: rgb(238, 237, 237); border-radius: 15px;'>
       <% if (user) { %>
         <div class="welcome">
-          <p>Welcome <span id='username'><%= user.nickname %></span></p>
+          <p>Welcome <span id='username'><img style="width: 35px; display: none;" src="<%= user.profile.avatar %>" alt="avatar" id='avatar'> <%= user.nickname %></span></p>
           <a href="/api/users/profile/" id='profile'><button type="button" class="btn btn-outline-secondary">Profile</button></a>
           <a href="/logout" id='logout'><button type="button" class="btn btn-outline-secondary">Logout</button></a>
         </div>
-        <span style='visibility: hidden;' id='avatar'><%= user.profile.avatar %></span>
         <% } else { %>
           <p>Welcome to <%= title %></p>
           <% } %>
