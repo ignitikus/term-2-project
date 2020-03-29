@@ -15,7 +15,7 @@ router.get('/', async(req, res, next)=> {
       post.relativeTime = moment(post.time * 1000).fromNow()
       return post;
     })
-    console.log(allPosts)
+
     return res.render('index', {title: 'Main page', data: response.data, allPosts})
   }
   return res.render('auth/login');
