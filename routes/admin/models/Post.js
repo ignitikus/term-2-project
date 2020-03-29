@@ -9,7 +9,8 @@ const PostSchema = new mongoose.Schema({
    picture:{type: 'String', default:'', trim: true},
    content:{type: 'String', default:'', trim:true},
    tags:{type: []},
-   time :{type: Date, default: Date.now }
+   time :{type: 'String', default: 'Void' },
+   relativeTime: {type: 'String', default: 'Void'}
 })
 
 

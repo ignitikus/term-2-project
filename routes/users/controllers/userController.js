@@ -2,6 +2,7 @@ const passport = require('passport')
 const Post = require('../../admin/models/Post')
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
+const moment = require('moment')
 const {validationResult} = require('express-validator')
 
 
@@ -103,6 +104,7 @@ module.exports = {
       newPost.title = req.body.title
       newPost.picture = req.body.pictureURL
       newPost.content = req.body.content
+      newPost.time = moment().format('X')
       newPost.tags = req.body.tags.split(',').map(tag=>tag.trim())
 
       newPost.save().then((post) => {

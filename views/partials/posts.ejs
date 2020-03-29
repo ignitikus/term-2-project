@@ -1,7 +1,7 @@
 <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
    <div class='post-container' style="display: flex;">
       <div class='posts'>
-         <% allPosts.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, time})=>{%>
+         <% allPosts.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, relativeTime})=>{%>
             <% if(visibility===true){ %>
                <div class="container single-post-container">
                   <div class="jumbotron post-jumbotron">
@@ -13,9 +13,15 @@
                         </div>
                         <div>
                            <h1><%= title %></h1>
-                           <p><%= content %> </p>
-                           <p><%= tags %> </p>
-                           <p>Posted by <%= authorNickname %> at <%= time %>  </p>
+                           <p><%= content %></p>
+                           <% tags.forEach(tag=>{%>
+                              <% if (tag.toLowerCase() === 'nsfw') { %>   
+                                 <a href="#"><span class="badge badge-danger"><%=tag%></span></a>
+                                 <% } else { %>
+                                 <a href="#"><span class="badge badge-info"><%=tag%></span></a>
+                              <% } %> 
+                           <%})%> 
+                           <p>Posted by <%= authorNickname %> <%= relativeTime %></p>
                         </div>
                      </div>
                   </div>
