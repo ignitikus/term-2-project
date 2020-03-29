@@ -1,11 +1,11 @@
 <div class="tab-pane fade show active" id="news" role="tabpanel" aria-labelledby="news-tab">
-   <% data.articles.forEach(({title, url, urlToImage, content}) =>{ %>
+   <% data.articles.forEach(({title, url, urlToImage, description}) =>{ %>
       <div class="container">
          <div class="jumbotron">
             <div style="display: flex;">
                <div>
                <h1><%= title %> </h1>
-               <p style="font-size: large;"><%= content.split('[')[0] %> </p>
+               <p style="font-size: large;"><%= description %> </p>
                </div>
                <img src="<%= urlToImage%>" alt="<%= title%>" class="article-image">
             </div>
