@@ -8,7 +8,7 @@
             <p id='success'><%= success %> </p>
          <% } %>
             <% allUsers.forEach(user=>{ %>
-               <form action="/api/admin/delete-user/<%=user.email%>?_method=Delete" method="POST">
+               <form action="/api/admin/delete-user/<%=user.email%>?_method=DELETE" method="POST">
                <li style="padding: 10px; list-style-type: none">
                   <div style="display: flex;">
                      <div>

@@ -30,6 +30,14 @@ module.exports ={
             return res.redirect('back')  
          }).catch(err=>console.log(err))
       }
+   },
+
+   deletePost: async(req,res) => {
+      const thePost = await Post.findById(req.params.postId)
+      await Post.deleteOne({_id: req.params.postId})
+      req.flash('message', `Post: ${thePost.title} deleted from database`)
+      return res.redirect('back')
    }
+   
 
 }

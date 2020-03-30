@@ -4,7 +4,8 @@ const User = require('../users/models/User')
 
 const {
    deleteUser, 
-   updatePostVisibility
+   updatePostVisibility,
+   deletePost
 } = require('./controllers/adminController')
 
 const {
@@ -13,5 +14,6 @@ const {
 
 router.put('/update-visibility/:id', loginValidationFail, updatePostVisibility)
 router.delete('/delete-user/:email', loginValidationFail ,deleteUser)
+router.delete('/delete-post/:postId', loginValidationFail ,deletePost)
 
 module.exports = router;

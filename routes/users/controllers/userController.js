@@ -12,8 +12,21 @@ module.exports = {
    },
 
    getProfile: async(req,res,next) => {
-   const allPostsByUser = await Post.find({author: req.user._id})
-   const allPosts = await Post.find({})
+   const allPostsByUserInitial = await Post.find({author: req.user._id})
+   const allPostsInitial = await Post.find({})
+
+   const allPosts = await allPostsInitial.map((post) => {
+      post.relativeTime = moment(post.time * 1000).fromNow()
+      return post;
+   })
+
+   const allPostsByUser = await allPostsByUserInitial.map((post) => {
+      post.relativeTime = moment(post.time * 1000).fromNow()
+      return post;
+   })
+
+
+
       if(req.user.admin){
             const allUsers = await User.find({})
             return res.render('auth/adminProfile', {allPosts, allPostsByUser, allUsers})

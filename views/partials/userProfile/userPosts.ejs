@@ -1,7 +1,7 @@
 <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
    <div class='post-container' style="display: flex;">
       <div class='posts'>
-         <% allPostsByUser.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, time})=>{%>
+         <% allPostsByUser.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, relativeTime})=>{%>
             <div class="container single-post-container">
                <div class="jumbotron post-jumbotron">
                   <div style="display: flex;">
@@ -19,7 +19,7 @@
                            <h1><%= title %></h1>
                            <p><%= content %> </p>
                            <p><%= tags %> </p>
-                           <p>Posted by <%= authorNickname %> at <%= time %>  </p>
+                           <p>Posted by <%= authorNickname %> <%= relativeTime %>  </p>
                         </div>
                      </div>
                   </div>
