@@ -116,7 +116,7 @@ module.exports = {
       const thePost = await Post.findById(req.params.id)
       thePost.comments.push({comment: req.body.addComment,author: req.params.user, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a')})
       thePost.save().then((post) => {
-         req.flash('success', `Your comment was added to ${post.title}`)
+         req.flash('success', {message: `Your comment was added to ${post.title}`, id: thePost._id})
          res.redirect('back')
       }).catch(err=>console.log(err))
    }
