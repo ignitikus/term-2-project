@@ -10,7 +10,8 @@ const PostSchema = new mongoose.Schema({
    content:{type: 'String', default:'', trim:true},
    tags:{type: []},
    time :{type: 'String', default: 'Void' },
-   relativeTime: {type: 'String', default: 'Void'}
+   relativeTime: {type: 'String', default: 'Void'},
+   comments:{type:[]}
 })
 
 

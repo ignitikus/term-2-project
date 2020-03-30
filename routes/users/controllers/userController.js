@@ -110,5 +110,14 @@ module.exports = {
       newPost.save().then((post) => {
          return res.redirect('/')
       }).catch(err=>console.log(err))
+   },
+
+   addComment: async (req,res,next) => {
+      const thePost = await Post.findById(req.params.id)
+      thePost.comments.push({comment: req.body.addComment,author: req.params.user, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a')})
+      thePost.save().then((post) => {
+         req.flash('success', `Your comment was added to ${post.title}`)
+         res.redirect('back')
+      }).catch(err=>console.log(err))
    }
 }

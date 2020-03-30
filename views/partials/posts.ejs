@@ -1,8 +1,54 @@
 <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
    <div class='post-container' style="display: flex;">
       <div class='posts'>
-         <% allPosts.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, relativeTime})=>{%>
+         <% if (success) { %>
+            <p id='success'><%= success %> </p>
+         <% } %>
+         <% allPosts.reverse().forEach(({visibility,title,picture,content,tags, authorNickname, relativeTime, _id, comments})=>{%>
             <% if(visibility===true){ %>
+               <!-- Modal -->
+               <div class="modal fade" id='post-<%= _id%>' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" style="max-width: 1140px;" role="document">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle"><%= title %> </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <div class="modal-body">
+                        <div style="">
+                           <% if (picture !== '') { %>
+                              <img src="<%=picture%>" alt="<%=title%>" style="max-width: 500px; display: block; margin-left: auto; margin-right: auto;"> 
+                           <% } %> 
+                        </div>
+                        <p><%= content %> </p>
+                     </div>
+                     <form action="/api/users/add-comment/<%= _id%>/<%= user.nickname %> " method="POST" id='comment'>
+                        <div class="modal-footer">
+                           <div class="input-group mb-3">
+                              <input type="text" class="form-control" placeholder='Leave a comment' aria-label="Default" aria-describedby="inputGroup-sizing-default" style="margin-top: 17px;" name='addComment'>
+                           </div>
+                           <button type="submit" class="btn btn-primary" form='comment'>Comment</button>
+                        </div>
+                     </form>
+                     <% if (comments.length>0) { %>
+                        <ul class="list-group">
+                           <% comments.forEach(({comment, timeStamp, author}) => { %>
+                              <% if (author.toLowerCase()==='admin') { %>
+                                 <li class="list-group-item list-group-item-primary" style="padding-left: 50px;"><%= comment %> <span style="font-style: italic;"> - <%= author %> (<%=timeStamp%>)</span></li>
+                                 <% } else { %>
+                                 <li class="list-group-item" style="padding-left: 50px;"><%= comment %> <span style="font-style: italic;"> - <%= author %> (<%=timeStamp%>)</span></li>
+                              <% } %>
+                           <% }) %>
+                        </ul>
+                     <% } %>
+                  </div>
+                  </div>
+               </div>
+
+               <!-- Container becomes body -->
+               <div type="button" class="" data-toggle="modal" data-target="#post-<%= _id%>">
                <div class="container single-post-container">
                   <div class="jumbotron post-jumbotron">
                      <div style="display: flex;">
@@ -13,7 +59,11 @@
                         </div>
                         <div>
                            <h1><%= title %></h1>
-                           <p><%= content %></p>
+                           <% if (content.length > 400) { %>
+                              <p><%= content.slice(0,400)+'...' %> </p>
+                              <% } else { %>
+                              <p><%= content %></p>
+                           <% } %>
                            <% tags.forEach(tag=>{%>
                               <% if (tag.toLowerCase() === 'nsfw') { %>   
                                  <a href="#"><span class="badge badge-danger"><%=tag%></span></a>
@@ -26,6 +76,7 @@
                      </div>
                   </div>
                </div>
+            </div>
             <% } %>
          <%})%> 
       </div>
