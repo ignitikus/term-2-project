@@ -67,8 +67,7 @@ app.use((req,res,next) => {
 })
 
 io.on('connection', (socket) => {
-  const users = []
-  socket.emit('userConnected', 'You are now connected!')
+  socket.emit('userConnected', `Welcome to chatroom! Messages are not recorded. All messages before you joined will not be displayed. Current number of users in the chat: ${socket.server.engine.clientsCount}`)
   socket.on('disconnect', ()=>{
     console.log('user disconnected');
   })

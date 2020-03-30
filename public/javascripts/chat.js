@@ -1,7 +1,7 @@
 $(function () {
    const socket = io();
    socket.on('userConnected', (msg) => {
-      $('#messages').append($('<li>').text(`Server Message: ${msg}`));
+      $('#messages').append($('<li class="list-group-item list-group-item-info">').text(`Server Message: ${msg}`));
    })
    $('#chat-form').submit(function(e){
       e.preventDefault(); // prevents page reloading
@@ -16,4 +16,5 @@ $(function () {
       console.log(socket)
       $('#messages').append($('<div class="avatar">').append($(`<img src='${avatar}'><li>${id}: ${msg}</li>`)));
    });
+
 });
