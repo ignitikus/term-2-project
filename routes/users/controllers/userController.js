@@ -12,26 +12,28 @@ module.exports = {
    },
 
    getProfile: async(req,res,next) => {
-   const allPostsByUserInitial = await Post.find({author: req.user._id})
-   const allPostsInitial = await Post.find({})
+      try {
+         const allPostsByUserInitial = await Post.find({author: req.user._id})
+         const allPostsInitial = await Post.find({})
 
-   const allPosts = await allPostsInitial.map((post) => {
-      post.relativeTime = moment(post.time * 1000).fromNow()
-      return post;
-   })
+         const allPosts = await allPostsInitial.map((post) => {
+            post.relativeTime = moment(post.time * 1000).fromNow()
+            return post;
+         })
 
-   const allPostsByUser = await allPostsByUserInitial.map((post) => {
-      post.relativeTime = moment(post.time * 1000).fromNow()
-      return post;
-   })
+         const allPostsByUser = await allPostsByUserInitial.map((post) => {
+            post.relativeTime = moment(post.time * 1000).fromNow()
+            return post;
+         })
 
-
-
-      if(req.user.admin){
-            const allUsers = await User.find({})
-            return res.render('auth/adminProfile', {allPosts, allPostsByUser, allUsers})
+            if(req.user.admin){
+                  const allUsers = await User.find({})
+                  return res.render('auth/adminProfile', {allPosts, allPostsByUser, allUsers})
+            }
+            return res.render('auth/userProfile', {allPosts, allPostsByUser})
+      } catch (error) {
+         console.log(error)
       }
-      return res.render('auth/userProfile', {allPosts, allPostsByUser})
    },
 
    login: passport.authenticate('local-login', {
@@ -73,40 +75,48 @@ module.exports = {
    },
 
    updateProfile: async(req,res,next) => {
-      const theUser = await User.findOne({email: req.user.email})
-      if(req.body.avatar) theUser.profile.avatar = req.body.avatar
-      if(req.body.first) theUser.profile.first = req.body.first
-      if(req.body.last) theUser.profile.last = req.body.last
-      if(req.body.email) theUser.email = req.body.email
-      if(req.body.nickname) theUser.nickname = req.body.nickname
+      try {
+         const theUser = await User.findOne({email: req.user.email})
+         if(req.body.avatar) theUser.profile.avatar = req.body.avatar
+         if(req.body.first) theUser.profile.first = req.body.first
+         if(req.body.last) theUser.profile.last = req.body.last
+         if(req.body.email) theUser.email = req.body.email
+         if(req.body.nickname) theUser.nickname = req.body.nickname
 
-      theUser.save(user=>{
-         req.flash('success2', 'Profile updated')
-         return res.redirect('/api/users/profile')
-      }).then(err=>console.log(err))
+         theUser.save(user=>{
+            req.flash('success2', 'Profile updated')
+            return res.redirect('/api/users/profile')
+         }).then(err=>console.log(err))
+      } catch (error) {
+         console.log(error)
+      }
    },
 
    updatePassword: async(req,res,next) => {
-      const theUser = await User.findOne({email: req.user.email})
-      const {oldPassword, newPassword, newPasswordRepeat} = req.body
-      if(oldPassword || newPassword || newPasswordRepeat){
-         if(newPassword !== newPasswordRepeat){
-            req.flash('errors', 'The repeat password doesn\'t match')
-            return res.redirect('back')
-         } 
-         const result = await bcrypt.compare(oldPassword, theUser.password)
-         if(!result){
-            req.flash('errors', 'Old password doesn\'t match')
-            return res.redirect('back')
-         } 
-         theUser.password = newPassword
-         await theUser.save((user) => {
-            req.flash('success', 'Password updated')
-            return res.redirect('back')
-         }).then(err=>console.log(err))
+      try {
+         const theUser = await User.findOne({email: req.user.email})
+         const {oldPassword, newPassword, newPasswordRepeat} = req.body
+         if(oldPassword || newPassword || newPasswordRepeat){
+            if(newPassword !== newPasswordRepeat){
+               req.flash('errors', 'The repeat password doesn\'t match')
+               return res.redirect('back')
+            } 
+            const result = await bcrypt.compare(oldPassword, theUser.password)
+            if(!result){
+               req.flash('errors', 'Old password doesn\'t match')
+               return res.redirect('back')
+            } 
+            theUser.password = newPassword
+            await theUser.save((user) => {
+               req.flash('success', 'Password updated')
+               return res.redirect('back')
+            }).then(err=>console.log(err))
+         }
+         req.flash('errors', 'Fill old fields to change password')
+         return res.redirect('back')
+      } catch (error) {
+         console.log(error)
       }
-      req.flash('errors', 'Fill old fields to change password')
-      return res.redirect('back')
    },
 
    createPost: (req,res,next) => {
@@ -126,11 +136,15 @@ module.exports = {
    },
 
    addComment: async (req,res,next) => {
-      const thePost = await Post.findById(req.params.id)
-      thePost.comments.push({comment: req.body.addComment,author: req.params.user, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a')})
-      thePost.save().then((post) => {
-         req.flash('success', {message: `Your comment was added to ${post.title}`, id: thePost._id})
-         res.redirect('back')
-      }).catch(err=>console.log(err))
+      try {
+         const thePost = await Post.findById(req.params.id)
+         thePost.comments.push({comment: req.body.addComment,author: req.params.user, timeStamp: moment().format('MMMM Do YYYY, h:mm:ss a')})
+         thePost.save().then((post) => {
+            req.flash('success', {message: `Your comment was added to ${post.title}`, id: thePost._id})
+            res.redirect('back')
+         }).catch(err=>console.log(err))
+      } catch (error) {
+         console.log(error)
+      }
    }
 }

@@ -10,7 +10,7 @@ Some of the packages used in this project:
 
 [News Api](https://newsapi.org) - Provides news headlines
 
-[Socket IO](socket.io) - allows real-time communication between the server and theclient
+[Socket IO](socket.io) - allows real-time communication between the server and thec lient
 
 Available routes:
    * `/` - main page accessible only after authorization. Features: latest 'covid-19' related news, user posts, and live chat.

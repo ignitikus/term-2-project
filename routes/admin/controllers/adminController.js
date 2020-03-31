@@ -18,26 +18,33 @@ module.exports ={
    },
 
    updatePostVisibility: async (req,res,next) => {
-      const thePost = await Post.findById(req.params.id)
-      if(thePost.visibility){
-         thePost.visibility = false
-         await thePost.save().then((post) => {
-            return res.redirect('back')  
-         }).catch(err=>console.log(err))
-      }else {
-         thePost.visibility = true
-         await thePost.save().then((post) => {
-            return res.redirect('back')  
-         }).catch(err=>console.log(err))
+      try{
+         const thePost = await Post.findById(req.params.id)
+         if(thePost.visibility){
+            thePost.visibility = false
+            await thePost.save().then((post) => {
+               return res.redirect('back')  
+            }).catch(err=>console.log(err))
+         }else {
+            thePost.visibility = true
+            await thePost.save().then((post) => {
+               return res.redirect('back')  
+            }).catch(err=>console.log(err))
+         }
+      } catch(error){
+         console.log(error)
       }
    },
 
    deletePost: async(req,res) => {
-      const thePost = await Post.findById(req.params.postId)
-      await Post.deleteOne({_id: req.params.postId})
-      req.flash('message', `Post: ${thePost.title} deleted from database`)
-      return res.redirect('back')
+      try {
+         const thePost = await Post.findById(req.params.postId)
+         await Post.deleteOne({_id: req.params.postId})
+         req.flash('message', `Post: ${thePost.title} deleted from database`)
+         return res.redirect('back')
+      } catch (error) {
+         console.log(error)
+      }
    }
    
-
 }
