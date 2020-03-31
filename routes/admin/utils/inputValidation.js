@@ -13,5 +13,10 @@ module.exports = {
       if(req.isAuthenticated()) return next()
       req.flash('errors', 'You need to login/register to access website')
       return res.redirect('/')
+   },
+      isAdmin: (req, res, next) => {
+      if(req.user.admin) return next()
+      req.flash('errors', 'Only admin can make this changes')
+      return res.redirect('/')
    }
 }

@@ -9,11 +9,12 @@ const {
 } = require('./controllers/adminController')
 
 const {
-   loginValidationFail
+   loginValidationFail,
+   isAdmin
 } = require('./utils/inputValidation')
 
-router.put('/update-visibility/:id', loginValidationFail, updatePostVisibility)
-router.delete('/delete-user/:email', loginValidationFail ,deleteUser)
-router.delete('/delete-post/:postId', loginValidationFail ,deletePost)
+router.put('/update-visibility/:id', isAdmin, loginValidationFail, updatePostVisibility)
+router.delete('/delete-user/:email', isAdmin, loginValidationFail ,deleteUser)
+router.delete('/delete-post/:postId', isAdmin, loginValidationFail ,deletePost)
 
 module.exports = router;

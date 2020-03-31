@@ -4,7 +4,6 @@ const axios = require('axios')
 const Post = require('./admin/models/Post')
 const moment = require('moment')
 
-/* GET home page. */
 router.get('/', async(req, res, next)=> {
   if(req.isAuthenticated()){
     const url = `http://newsapi.org/v2/everything?q=covid&apiKey=${process.env.GOOGLE_KEY}`
