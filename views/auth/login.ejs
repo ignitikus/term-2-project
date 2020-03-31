@@ -14,7 +14,7 @@
          <div id="large-header" class="large-header">
             <canvas id="demo-canvas"></canvas>
             <div class="box">
-               <% if (errors) { %>
+               <% if (errors.length>0) { %>
                      <p id='login-error'><span><%= errors %></span></p>
                <% } %>
                <h2>Login</h2>
