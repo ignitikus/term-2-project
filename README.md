@@ -2,10 +2,14 @@
 
 [Link to project on heroku](https://nikocode-term2-project.herokuapp.com)
 
-Some of the packages used in this project
+Some of the packages used in this project: 
+
 [Method override](https://www.npmjs.com/package/method-override) - allows to use HTTP verbs (PUT and DELETE) on a client side
+
 [bcryptjs](https://www.npmjs.com/package/bcryptjs) - password encryption
+
 [News Api](https://newsapi.org) - Provides news headlines
+
 [Socket IO](socket.io) - allows real-time communication between the server and theclient
 
 Available routes:
