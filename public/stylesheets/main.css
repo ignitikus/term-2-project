@@ -176,15 +176,23 @@ footer{
    cursor: pointer;
 }
 @media (max-width: 575px){
-   form {
-      width: 100%;
-      max-width: 540px;
+   .post-form{
+      display: none;
+   }
+   .chat-form{
+      width: 90vw;
    }
    .single-post-container{
-      width: 50vw;
+      width: 90vw;
    }
    .jumbotron>div>img{
       display: none;
+   }
+   .post-picture-preview{
+      display: none;
+   }
+   .profile-container{
+      width: 50vw;
    }
 }
 
@@ -199,6 +207,9 @@ footer{
    .jumbotron>div>img{
       display: none;
    }
+   .post-picture-preview{
+      display: none;
+   }
 }
 
 @media (min-width: 768px){
@@ -209,6 +220,9 @@ footer{
       width: 65vw;
    }
    .jumbotron>div>img{
+      display: initial;
+   }
+   .post-picture-preview{
       display: initial;
    }
 }
