@@ -2,15 +2,20 @@
 
 [Link to project on heroku](https://nikocode-term2-project.herokuapp.com)
 
+<p>
+Got questions? Send me an email:
+<a href="mailto:nikolay.kim@codeimmersives.com?Subject=Hello" target="_top">Send Mail</a>
+</p>
+
 Some of the packages used in this project: 
 
 [Method override](https://www.npmjs.com/package/method-override) - allows to use HTTP verbs (PUT and DELETE) on a client side
 
 [bcryptjs](https://www.npmjs.com/package/bcryptjs) - password encryption
 
-[News Api](https://newsapi.org) - Provides news headlines
+[Socket IO](socket.io) - allows real-time communication between the server and the client
 
-[Socket IO](socket.io) - allows real-time communication between the server and thec lient
+[News Api](https://newsapi.org) - Provides news headlines
 
 Available routes:
    <p align="center">
@@ -39,3 +44,15 @@ Available routes:
       * DELETE
          * `/delete-user/:email` - deletes a user from database. `:email` - users email has to match with database
          * `/delete-post/:postId` - deletes a post from database
+
+## How to make it work locally:
+   1. Fork and clone this repo
+   2. Install all dependencies
+   3. Create `.env` file in the root
+      * `.env` file holds all values that you want to hide from the user. 
+      * Populate file with following: 
+         >PORT = any port you would like to use (3000 by default)<br>
+         >SESSION_SECRET = 'any string' <br>
+         >MONGODB_URI = 'path to your mongo storage' <br>
+         >GOOGLE_KEY = 'API key for News API'
+   4. To launch the server type: `node ./bin/www`
