@@ -1,11 +1,10 @@
 # This is Term 2 Project @CodeImmersives
 
-[Link to project on heroku](https://nikocode-term2-project.herokuapp.com)
+## [Link to the project on heroku](https://nikocode-term2-project.herokuapp.com)
 
-<p>
-Got questions? Send me an email:
-<a href="mailto:nikolay.kim@codeimmersives.com?Subject=Hello" target="_top">Send Mail</a>
-</p>
+
+## Got questions? Send me an email: <a href="mailto:nikolay.kim@codeimmersives.com?Subject=Hello" target="_top">Send Mail</a>
+
 
 Some of the packages used in this project: 
 
@@ -19,7 +18,7 @@ Some of the packages used in this project:
 
 Available routes:
    <p align="center">
-   <img src="public/images/map.png">
+   <img style='max-width: 500px' src="public/images/map.png">
    </p>
    
    * `/` - main page accessible only after authorization. Features: latest 'covid-19' related news, user posts, and live chat.
