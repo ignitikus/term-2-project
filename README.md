@@ -13,6 +13,10 @@ Some of the packages used in this project:
 [Socket IO](socket.io) - allows real-time communication between the server and thec lient
 
 Available routes:
+   <p align="center">
+   <img src="public/images/map.png">
+   </p>
+   
    * `/` - main page accessible only after authorization. Features: latest 'covid-19' related news, user posts, and live chat.
    * `/logout` - logs out user and destroys session.
 
@@ -34,4 +38,4 @@ Available routes:
          * `/update-visibility/:id` - admin account has ability to change visibility for every user post(`:id` - id of a post). Upon changing visibility, post no longer will be present in *posts* tab but still be visible in profile section
       * DELETE
          * `/delete-user/:email` - deletes a user from database. `:email` - users email has to match with database
-         * `delete-post/:postId` - deletes a post from database
+         * `/delete-post/:postId` - deletes a post from database
